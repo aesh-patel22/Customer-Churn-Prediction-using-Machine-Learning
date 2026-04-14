@@ -18,33 +18,84 @@ st.set_page_config(
 # --- CUSTOM CSS ---
 st.markdown("""
 <style>
-    /* Styling for the overall theme */
+    /* Global App Styling */
+    .stApp {
+        background-color: #f8fafc;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Top Padding adjustment */
     div[data-testid="stAppViewBlockContainer"] {
         padding-top: 2rem;
     }
     
-    /* Metrics block styling to look like premium cards */
+    /* Elegant Metrics Cards layout with glassmorphism */
     div[data-testid="stMetric"] {
-        background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-        border: 1px solid #c7d2fe;
-        padding: 15px;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(99, 102, 241, 0.1);
+        background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.85) 100%);
+        border: 1px solid #e2e8f0;
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px -5px rgba(251, 113, 133, 0.15), 0 8px 10px -6px rgba(251, 113, 133, 0.1);
+        backdrop-filter: blur(10px);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    div[data-testid="stMetric"]:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 28px rgba(251, 113, 133, 0.2), 0 10px 10px rgba(0,0,0,0.05);
     }
     
+    /* Highlighting Metric Value */
+    div[data-testid="stMetricValue"] {
+        color: #fb7185;
+        font-weight: 800;
+        font-size: 2rem;
+    }
+
     hr {
-        border-top: 1px solid #c7d2fe;
+        border-top: 1px solid #e2e8f0;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
     
     h1 {
         font-family: 'Inter', sans-serif;
-        color: #312e81;
-        font-weight: 800;
+        color: #0f172a;
+        font-weight: 900;
+        background: -webkit-linear-gradient(45deg, #3b82f6, #1d4ed8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
     }
     
-    h2, h3 {
-        color: #4f46e5;
+    h2, h3, h4 {
+        color: #1e293b;
+        font-weight: 700;
+    }
+    
+    p, label, span {
+        color: #334155;
+    }
+    
+    /* Sidebar customization */
+    [data-testid="stSidebar"] {
+        background-color: #ffffff;
+        border-right: 1px solid #f1f5f9;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.03);
+    }
+    
+    .stButton > button {
+        background: linear-gradient(90deg, #fb7185 0%, #f43f5e 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
         font-weight: 600;
+        box-shadow: 0 4px 6px rgba(244, 63, 94, 0.2);
+        transition: all 0.3s ease;
+    }
+    .stButton > button:hover {
+        transform: scale(1.02);
+        box-shadow: 0 6px 12px rgba(244, 63, 94, 0.3);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -195,13 +246,13 @@ with p_col2:
         number = {'font': {'color': '#111827'}},
         gauge = {
             'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "#374151"},
-            'bar': {'color': "#ff2a5f" if churn_prob > 0.5 else "#00d4ff"},
+            'bar': {'color': "#f43f5e" if churn_prob > 0.5 else "#3b82f6"},
             'bgcolor': "rgba(0,0,0,0)",
             'borderwidth': 2,
-            'bordercolor': "#e5e7eb",
+            'bordercolor': "#e2e8f0",
             'steps': [
-                {'range': [0, 50], 'color': "rgba(0, 212, 255, 0.1)"},
-                {'range': [50, 100], 'color': "rgba(255, 42, 95, 0.1)"}
+                {'range': [0, 50], 'color': "rgba(59, 130, 246, 0.1)"},
+                {'range': [50, 100], 'color': "rgba(244, 63, 94, 0.1)"}
             ]
         }
     ))
@@ -217,7 +268,7 @@ c_col1, c_col2 = st.columns(2)
 
 with c_col1:
     contract_dist = px.histogram(df, x="Contract", color="Churn", barmode='group', 
-                        color_discrete_map={"Yes": "#ff2a5f", "No": "#00d4ff"},
+                        color_discrete_map={"Yes": "#f43f5e", "No": "#3b82f6"},
                         title="Churn Frequency vs Contract Duration")
     contract_dist.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font_color='#374151', xaxis_title="Contract Type", yaxis_title="Customer Count")
     contract_dist.update_xaxes(showgrid=False)
@@ -226,7 +277,7 @@ with c_col1:
 
 with c_col2:
     charge_dist = px.box(df, x="Churn", y="MonthlyCharges", color="Churn",
-                  color_discrete_map={"Yes": "#ff2a5f", "No": "#00d4ff"},
+                  color_discrete_map={"Yes": "#f43f5e", "No": "#3b82f6"},
                   title="Monthly Charges Impact on Churn")
     charge_dist.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font_color='#374151', xaxis_title="Churn Event", yaxis_title="Monthly Charges ($)")
     charge_dist.update_xaxes(showgrid=False)
