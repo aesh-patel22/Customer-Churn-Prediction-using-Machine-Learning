@@ -24,6 +24,14 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
+    /* Remove default Streamlit top header and black line */
+    [data-testid="stHeader"] {
+        display: none;
+    }
+    [data-testid="stDecoration"] {
+        display: none;
+    }
+    
     /* Top Padding adjustment */
     div[data-testid="stAppViewBlockContainer"] {
         padding-top: 2rem;
