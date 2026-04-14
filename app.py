@@ -250,8 +250,8 @@ with p_col2:
     gauge = go.Figure(go.Indicator(
         mode = "gauge+number",
         value = churn_prob*100,
-        title = {'text': "Churn Probability (%)", 'font': {'color': '#374151'}},
-        number = {'font': {'color': '#111827'}},
+        title = {'text': "Churn Probability (%)", 'font': {'color': '#000000'}},
+        number = {'font': {'color': '#000000'}},
         gauge = {
             'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "#374151"},
             'bar': {'color': "#f43f5e" if churn_prob > 0.5 else "#3b82f6"},
@@ -278,18 +278,18 @@ with c_col1:
     contract_dist = px.histogram(df, x="Contract", color="Churn", barmode='group', 
                         color_discrete_map={"Yes": "#f43f5e", "No": "#3b82f6"},
                         title="Churn Frequency vs Contract Duration")
-    contract_dist.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font_color='#374151', xaxis_title="Contract Type", yaxis_title="Customer Count")
+    contract_dist.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font_color='#000000', xaxis_title="Contract Type", yaxis_title="Customer Count")
     contract_dist.update_xaxes(showgrid=False)
-    contract_dist.update_yaxes(showgrid=True, gridcolor='#00000')
+    contract_dist.update_yaxes(showgrid=True, gridcolor='#000000')
     st.plotly_chart(contract_dist, width='stretch')
 
 with c_col2:
     charge_dist = px.box(df, x="Churn", y="MonthlyCharges", color="Churn",
                   color_discrete_map={"Yes": "#f43f5e", "No": "#3b82f6"},
                   title="Monthly Charges Impact on Churn")
-    charge_dist.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font_color='#374151', xaxis_title="Churn Event", yaxis_title="Monthly Charges ($)")
+    charge_dist.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font_color='#000000', xaxis_title="Churn Event", yaxis_title="Monthly Charges ($)")
     charge_dist.update_xaxes(showgrid=False)
-    charge_dist.update_yaxes(showgrid=True, gridcolor='#00000')
+    charge_dist.update_yaxes(showgrid=True, gridcolor='#000000')
     st.plotly_chart(charge_dist, width='stretch')
 
 # Dataset preview
