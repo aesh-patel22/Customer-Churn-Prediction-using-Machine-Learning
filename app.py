@@ -280,7 +280,7 @@ with c_col1:
                         title="Churn Frequency vs Contract Duration")
     contract_dist.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font_color='#374151', xaxis_title="Contract Type", yaxis_title="Customer Count")
     contract_dist.update_xaxes(showgrid=False)
-    contract_dist.update_yaxes(showgrid=True, gridcolor='#e5e7eb')
+    contract_dist.update_yaxes(showgrid=True, gridcolor='#00000')
     st.plotly_chart(contract_dist, width='stretch')
 
 with c_col2:
@@ -289,7 +289,7 @@ with c_col2:
                   title="Monthly Charges Impact on Churn")
     charge_dist.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font_color='#374151', xaxis_title="Churn Event", yaxis_title="Monthly Charges ($)")
     charge_dist.update_xaxes(showgrid=False)
-    charge_dist.update_yaxes(showgrid=True, gridcolor='#e5e7eb')
+    charge_dist.update_yaxes(showgrid=True, gridcolor='#00000')
     st.plotly_chart(charge_dist, width='stretch')
 
 # Dataset preview
